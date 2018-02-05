@@ -1,36 +1,19 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import AllAlbums from './AllAlbums';
 import SingleAlbum from './SingleAlbum';
 import Sidebar from './Sidebar';
 import Player from './Player';
+import AllArtists from './AllArtists'
+import SingleArtist from './SingleArtist'
+import  { Route, HashRouter } from 'react-router-dom'
+import StatefulAlbums from './StatefulAlbums';
 
 export default class Main extends Component {
 
   constructor (props) {
     super(props);
     this.state = {
-      albums: [],
-      selectedAlbum: {}
     };
-    this.selectAlbum = this.selectAlbum.bind(this);
-    this.deselectAlbum = this.deselectAlbum.bind(this);
-  }
-
-  componentDidMount () {
-    axios.get('/api/albums/')
-      .then(res => res.data)
-      .then(albums => {
-        this.setState({ albums })
-      });
-  }
-
-  selectAlbum (albumId) {
-    axios.get(`/api/albums/${albumId}`)
-      .then(res => res.data)
-      .then(album => this.setState({
-        selectedAlbum: album
-      }));
   }
 
   deselectAlbum () {
@@ -39,19 +22,21 @@ export default class Main extends Component {
 
   render () {
     return (
-      <div id="main" className="container-fluid">
-        <div className="col-xs-2">
-          <Sidebar deselectAlbum={this.deselectAlbum} />
+      <HashRouter>
+        <div id="main" className="container-fluid">
+          <div className="col-xs-2">
+            <Sidebar deselectAlbum={this.deselectAlbum} />
+          </div>
+            <div className="col-xs-10">
+            <Route exact path='/' component={StatefulAlbums} />
+              <Route exact path='/albums' component={StatefulAlbums} />
+              <Route path='/albums/:albumId' component={SingleAlbum} />
+              <Route exact path='/artists' component={AllArtists} />
+              <Route exact path='/artists/:artistId' component={SingleArtist} />
+            </div>
+          <Player />
         </div>
-        <div className="col-xs-10">
-        {
-          this.state.selectedAlbum.id ?
-          <SingleAlbum album={this.state.selectedAlbum} /> :
-          <AllAlbums albums={this.state.albums} selectAlbum={this.selectAlbum} />
-        }
-        </div>
-        <Player />
-      </div>
+      </HashRouter>
     );
   }
 }
