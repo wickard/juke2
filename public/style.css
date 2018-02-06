@@ -60,3 +60,15 @@ footer {
 
 .album img {
   height: 300px; }
+
+.notFound {
+  color: black;
+  position: relative;
+}
+
+.notFound a{
+  left: 350px;
+  color: black;
+  position: absolute;
+  z-index: 2;
+}

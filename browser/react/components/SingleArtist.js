@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import { Link, Route } from 'react-router-dom'
+import { NavLink, Route } from 'react-router-dom'
 import Songs from './Songs'
 import AllAlbums from './AllAlbums'
-import StatefulAlbums from './StatefulAlbums'
 
 export default class SingleArtist extends Component {
   constructor (){
@@ -42,11 +41,12 @@ export default class SingleArtist extends Component {
       <div>
         <h3>{ artist.name }</h3>
         <ul className="nav nav-tabs">
-          <li><Link to={`${artist.id}/albums`}>ALBUMS</Link></li>
-          <li><Link to="TODO">SONGS</Link></li>
+          <li><NavLink activeClassName="active" to={`/artists/${artist.id}/albums`}>ALBUMS</NavLink></li>
+          <li><NavLink activeClassName="active" to={`/artists/${artist.id}/songs`}>SONGS</NavLink></li>
         </ul>
-        <Route path="/artists/1/albums" component={StatefulAlbums} />
-      </div>
+            <Route path={`/artists/${artist.id}/albums`} render={ () => <AllAlbums albums={this.state.albums} />} />
+            <Route path={`/artists/${artist.id}/songs`} render={ () => <Songs songs={this.state.songs} />} />
+        </div>
     );
   }
 

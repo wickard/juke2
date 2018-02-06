@@ -27,7 +27,7 @@ export default class SingleAlbum extends Component {
     return (
       <div className="album">
         <div>
-          <h3>{ album.name }</h3>
+          <h3>{ album.name } <span> <a href="mailto:JnJ@Juke.com?subject=Triggered%20about%20album"><i className="glyphicon glyphicon-bullhorn" /></a></span></h3>
           <img src={ album.imageUrl } className="img-thumbnail" />
         </div>
         <Songs songs={album.songs} />
