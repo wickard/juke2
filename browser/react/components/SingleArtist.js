@@ -45,7 +45,6 @@ export default class SingleArtist extends Component {
           <li><Link to={`${artist.id}/albums`}>ALBUMS</Link></li>
           <li><Link to="TODO">SONGS</Link></li>
         </ul>
-
         <Route path="/artists/1/albums" component={StatefulAlbums} />
       </div>
     );
