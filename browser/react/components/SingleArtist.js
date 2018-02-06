@@ -35,7 +35,7 @@ export default class SingleArtist extends Component {
   }
   render () {
 
-    const artist = this.state.artist; // or however you've named it
+    const artist = this.state.artist;
 
     return (
       <div>
@@ -52,12 +52,3 @@ export default class SingleArtist extends Component {
 
 }
 
-// return (
-  //AllAlbums albums={this.match.albums}
-//   <div>
-//     <h2>{this.state.artist.name}</h2>
-//     <AllAlbums albums={this.state.albums} />
-//     <Songs songs={this.state.songs} />
-//   </div>
-// )
-// }
